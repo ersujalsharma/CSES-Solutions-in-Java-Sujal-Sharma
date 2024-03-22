@@ -1,12 +1,47 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution {
+public class Josephus_Problem_I {
     public static void main(String[] args) {
         FastIO io = new FastIO();
         int n = io.nextInt();
-		
-    }
+		ArrayList<Integer> list = new ArrayList<>();
+		for (int i = 1; i <= n; i++) {
+			list.add(i);
+		}
+		StringBuilder sb = new StringBuilder();
+		boolean lastFree = false;
+		int start = 0;
+		while(!list.isEmpty()){
+			// start = (start+1)%list.size();
+			// sb.append(list.remove(start)+" ");
+			ArrayList<Integer> list2 = new ArrayList<>();
+			if(lastFree){
+				for(int i=0;i<list.size();i=i+2){
+					sb.append(list.get(i)+" ");
+					lastFree = false;
+					if(i+1<list.size()){
+						list2.add(list.get(i+1));
+						lastFree = true;
+					}
+				}
+			}
+			else{
+				for(int i=0;i<list.size();i=i+2){
+					list2.add(list.get(i));
+					lastFree = true;
+					if(i+1<list.size()){
+						sb.append(list.get(i+1)+" ");
+						lastFree = false;
+					}
+				}
+			}
+			// System.out.println(list+" / "+list2+" / "+sb);
+			list = list2;
+		}
+		sb.deleteCharAt(sb.length()-1);
+		System.out.println(sb);
+    }	
 
     static class FastIO extends PrintWriter {
 		private InputStream stream;
