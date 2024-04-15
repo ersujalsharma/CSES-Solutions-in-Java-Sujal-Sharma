@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solution {
+public class CountingNumbers {
     static long[][][][] dp = new long[20][10][2][2];
 
     // Function to calculate the count of valid numbers using Digit DP
